@@ -26,7 +26,7 @@
                 </a>
             </li>
             <li class="px-2 font-semibold">
-                <form action="{{ route('logout') }}">
+                <form action="{{ route('logout') }}" method="post">
                     @csrf
                     <button type="submit" class="font-semibold"><i class="fas fa-sign-out-alt"></i></button>
                 </form>
@@ -38,7 +38,12 @@
     <div class="flex h-full">
         <div class="md:w-64 h-full bg-white border-r">
             <ul>
-                <li class="py-3 h-32 border-b px-3"></li>
+                <li class="py-3 h-32 border-b px-3">
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Flag_of_Guinea.svg" alt=""
+                        class="object-cover h-24 w-full mx-auto"
+                    />
+                </li>
                 <li class="py-3 border-b px-3">
                     <a href="{{ route('worker_settings') }}">
                         <i class="fas fa-cogs mr-2"></i>

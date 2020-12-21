@@ -51,3 +51,4 @@ Route::post('/worker/skill-selection/{skill}/choose', [SkillSelectionController:
 Route::post('/worker/skill-selection/{skill}/destroy', [SkillSelectionController::class, 'destroySkill'])->name('unselect_skill');
 Route::get('/worker/settings', [WorkerDashboardController::class, 'settings'])->name('worker_settings');
 Route::post('/worker/settings/add-address', [WorkerDashboardController::class, 'storeAddress'])->name('worker_add_address');
+Route::post('/worker/settings/add-phone-number', [WorkerDashboardController::class, 'storePhoneNumber'])->name('worker_add_phone_number');

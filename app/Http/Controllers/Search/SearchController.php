@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Search;
 
 use App\Http\Controllers\Controller;
 use App\Models\Skill;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,6 +12,8 @@ class SearchController extends Controller
 {
     public function index(Request $request) {
         $position = $request->query('position');
+        $quartier = $request->query('quartier');
+        $prefecture = $request->query('prefecture');
         $minDistance = $request->query('distance');
 
         $workers = [];
@@ -24,21 +27,32 @@ class SearchController extends Controller
             $longitude = $pos[1];
 
             $query =
-                "worker_id, w.avatar, w.first_name, w.last_name, w.note" .
+                "worker_id, w.avatar, w.first_name, w.last_name, w.note, w.phone_number" .
                 ", (((acos(sin((? * pi()/180)) * sin((latitude*pi()/180)) + cos((? * pi()/180)) * cos((latitude*pi()/180)) * cos(((? - longitude) * pi()/180)))) * 180/pi()) * 60 * 1.1515 * 1.609344) as distance";
 
             $workers =
                 DB::table('coords')
                     ->selectRaw($query, [$latitude, $latitude, $longitude])
-                    ->join('workers as w', 'worker_id', '=', 'w.id')
-                    ->havingRaw('distance <= ?', [$minDistance])
-                    ->paginate(20);
+                    ->join('workers as w', 'worker_id', '=', 'w.id');
+
+            if(is_null($quartier))
+                $workers = $workers->havingRaw('distance <= ?', [$minDistance]);
+            else
+                $workers = $workers
+                                ->whereRaw('quartier = ?', [strtolower($quartier)])
+                                ->whereRaw('prefecture = ?', [strtolower($prefecture)]);
+
+            $workers = $workers->paginate(20);
         }
 
         return view('search.search', [
             'workers' => $workers,
             'skills' => Skill::get()
         ]);
+    }
+
+    public function nearbyWorkersJson() {
+        return ;
     }
 
     protected function getDistance(

@@ -8,6 +8,25 @@
         <h1 class="text-3xl font-bold">Paramètres du compte</h1>
 
         <div class="my-8">
+            <p class="font-semibold pb-4 border-b">Numéro de téléphone</p>
+            <div class="flex">
+                <div class="w-64">
+                    <p class="mt-3">Numéro actuel: {{ auth()->user()->worker->phone_number }}</p>
+                </div>
+                <form action="{{ route('worker_add_phone_number') }}" method="post" class="mb-4">
+                    @csrf
+                    <div class="my-4">
+                        <input type="tel" name="phone_number" class="border py-1 px-3 rounded" @error('phone_number') border-red-500 @enderror />
+                        <button type="submit" class="border rounded border-black px-3 py-1 bg-black text-white font-semibold">Mettre à jour</button>
+                    </div>
+                    @error('phone_number')
+                    <p class="text-sm text-red-500">{{ $message }}</p>
+                    @enderror
+                </form>
+            </div>
+        </div>
+
+        <div class="my-8">
             <p class="font-semibold pb-4 border-b">Adresses</p>
             <form class="mb-4 border-b" action="{{ route('worker_add_address') }}" method="post">
                 @error('latitude')
@@ -49,8 +68,14 @@
         </div>
 
         <div class="mb-8">
+            <div class="flex py-4 font-semibold border-b">
+                <div class="w-2/12">Quartier</div>
+                <div class="w-2/12">Préfecture</div>
+                <div class="w-2/12">Latitude</div>
+                <div class="w-2/12">Longitude</div>
+            </div>
             @foreach($coords as $coord)
-                <div class="flex py-4">
+                <div class="flex py-4 border-b">
                     <div class="w-2/12">
                         <p>{{ $coord->quartier }}</p>
                     </div>

@@ -35,10 +35,22 @@ class WorkerDashboardController extends Controller
         Coords::create([
            'latitude' => $request->latitude,
            'longitude' => $request->longitude,
-           'quartier' => $request->quartier,
-           'prefecture' => $request->prefecture,
+           'quartier' => strtolower($request->quartier),
+           'prefecture' => strtolower($request->prefecture),
             'worker_id' => $request->user()->worker->id
         ]);
+
+        return back();
+    }
+
+    public function storePhoneNumber(Request $request) {
+        $this->validate($request, [
+            'phone_number' => 'required|regex:/^6[0-9]{2}[0-9]{6}$/'
+        ]);
+
+        $worker = auth()->user()->worker;
+        $worker->phone_number = $request->phone_number;
+        $worker->save();
 
         return back();
     }

@@ -14,18 +14,20 @@
     </head>
     <body class="h-screen">
         <header class="py-4 border-b-2 sticky top-0 z-50 bg-white">
-            <nav class="flex">
-                <ul class="flex justify-center items-center flex-1">
-                    <li class="px-2 font-semibold">
-                        <a href="/">Mon ouvrier</a>
+            <nav class="md:flex">
+                <ul class="mb-4 md:mb-0 md:flex justify-center items-center flex-1">
+                    <li class="px-2 font-semibold mr-4">
+                        <a href="/" class="font-bold text-3xl">Mon ouvrier</a>
                     </li>
-                    <li class="px-2 font-semibold">
-                        <a href="{{ route('dashboard') }}">Tableau de bord</a>
-                    </li>
+                    @auth
+                        @if(auth()->user()->status == "ADMIN")
+                            <li class="px-2 text-sm mr-4">
+                                <a href="{{ route('dashboard') }}"><i class="fas fa-chalkboard-teacher mr-2"></i> Tableau de bord</a>
+                            </li>
+                        @endif
+                    @endauth
                 </ul>
-                <div class="flex-1 flex items-center">
-
-                </div>
+                <div class="flex-1 flex items-center"></div>
                 <ul class="flex-1 flex items-center">
                     @auth
                         <li class="px-2">
@@ -42,19 +44,21 @@
                         </li>
                     @endauth
                     @guest
-                        <li class="px-2 font-semibold">
+                        <li class="px-2 text-sm">
                             <a href="{{ route('register') }}">Inscription</a>
                         </li>
-                        <li class="px-2 font-semibold"><a href="{{ route('login') }}">Connexion</a></li>
+                        <li class="px-2 text-sm"><a href="{{ route('login') }}">Connexion</a></li>
                     @endguest
                 </ul>
             </nav>
         </header>
-        <main class="h-full bg-white z-50 shadow-lg">
+
+        <main class="bg-white z-50" style="min-height: 100vh">
             @yield('page_content')
         </main>
-        <footer class="bg-gray-800 text-gray-300 sticky bottom-0 bg-white pt-14" style="z-index: -10;">
-            <div class="py-8 px-24">
+
+        <footer class="bg-gray-800 text-gray-300 sticky bottom-0 bg-white mt-32 md:mt-0 md:pt-14" style="z-index: -10;">
+            <div class="px-4 py-2 md:py-8 md:px-24">
                 <h1 class="font-bold text-3xl">Newsletter</h1>
                 <p class="my-4">
                     Inscrivez-vous à notre newsletter pour recevoir nos offres d'emploi et nos actualités
@@ -67,7 +71,7 @@
                 </div>
             </div>
             <div class="border-b border-gray-900 my-8"></div>
-            <div class="flex px-24 py-12">
+            <div class="md:flex px-4 py-4 md:px-24 md:py-12">
                 <div class="flex-2">
                     <h1 class="font-bold text-3xl">Mon ouvrier</h1>
                     <p class="my-4 text-sm">
@@ -88,11 +92,11 @@
                         <a href="" class="">Contact</a>
                     </p>
                 </div>
-                <div class="flex-1 md:px-14">
-                    <p class="font-bold text-2xl text-center">Contact</p>
+                <div class="flex-1 mt-4 md:mt-0 md:px-14">
+                    <p class="font-bold text-2xl">Contact</p>
                 </div>
             </div>
-            <p class="py-4 px-24 bg-gray-600 border-gray-800 border-t text-sm font-semibold">
+            <p class="px-4 py-3 md:py-4 md:px-24 bg-gray-600 border-gray-800 border-t text-sm font-semibold">
                Créé avec <i class="fas fa-heart"></i> par
                 <a href="https://instagram.com/imhassane" class="font-bold" target="_blank">Hassane SOW</a> et
                 <span class="font-bold">Rodney ABOUE</span>

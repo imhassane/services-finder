@@ -7,14 +7,16 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
-        * {
-            font-family: 'Source Sans Pro';
-        }
     </style>
 </head>
 <body class="h-screen">
 <header class="py-4 border-b-2 sticky top-0 z-50 bg-white">
     <nav class="flex">
+        <ul class="flex-1">
+            <li class="pl-24 mr-4">
+                <a href="/" class="font-bold text-3xl">Mon ouvrier</a>
+            </li>
+        </ul>
         <ul class="flex-1 flex justify-end items-center">
             <li class="px-2">
                 <a href="{{ route('notifications') }}"><i class="fas fa-bell"></i></a>
