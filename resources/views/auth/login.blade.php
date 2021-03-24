@@ -4,8 +4,8 @@
 
 @section('page_content')
 
-    <div class="h-full pt-20">
-        <div class="w-1/2 mx-auto p-12 bg-white">
+    <div class="h-full md:pt-20">
+        <div class="md:w-1/2 mx-auto p-4 md:p-12 bg-white">
 
             <h1 class="text-3xl font-bold mb-10">Connexion</h1>
 
@@ -14,23 +14,6 @@
                     <p class="text-sm text-white">{{ session('fail') }}</p>
                 </div>
             @endif
-
-            <div class="my-6 flex">
-                <form class="flex-1 mr-1" action="" method="post">
-                    @csrf
-                    <button
-                        type="submit"
-                        class="w-full border py-1 rounded"
-                    >Se connecter avec Google</button>
-                </form>
-                <form class="flex-1" action="" method="post">
-                    @csrf
-                    <button
-                        type="submit"
-                        class="w-full border py-1 rounded"
-                    >Se connecter avec facebook</button>
-                </form>
-            </div>
 
             <form action="{{ route('login') }}" method="post">
                 @csrf
@@ -65,6 +48,10 @@
                     >Connexion</button>
                 </div>
             </form>
+
+            <div class="my-4">
+                <a href="{{ route('reactivation_demand') }}" class="text-sm text-blue-500">Faire une demande de réactivation</a>
+            </div>
         </div>
     </div>
 

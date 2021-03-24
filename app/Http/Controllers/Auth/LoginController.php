@@ -15,6 +15,10 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
+    public function reactivationDemand() {
+        return view('auth.reactivation_demand');
+    }
+
     public function authenticate(Request $request) {
         $this->validate($request, [
             'email' => 'required|email',
@@ -26,20 +30,36 @@ class LoginController extends Controller
         }
 
         $route = "";
-        switch(auth()->user()->status) {
+        $user = auth()->user();
+
+        switch($user->status) {
             case "WORKER":
-                $route = "worker_dashboard";
+                $route = "worker_settings";
                 break;
             case "CUSTOMER":
                 $route = "customer_dashboard";
                 break;
             case "ADMIN":
-                $route = "dashboard";
+                $route = "categories_admin";
                 break;
             default:
                 return back()->with('fail', "Une erreur inconnue est survenue");
         }
 
+        if($user->visible == 0) {
+            auth()->logout();
+            return back()->with('fail', "Ce compte a été désactivé, essayez une demande de réactivation");
+        }
+
         return redirect()->route($route);
     }
+
+    public function reactivate(Request $request) {
+        $this->validate($request, [
+            'email' => 'required|email',
+        ]);
+
+        return back();
+    }
+
 }

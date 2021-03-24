@@ -12,7 +12,8 @@ class Skill extends Model
     protected $fillable = [
         'title',
         'description',
-        'cover'
+        'cover',
+        'visible'
     ];
 
     public function users() {

@@ -13,6 +13,7 @@ class SearchController extends Controller
     public function index(Request $request) {
         $position = $request->query('position');
         $quartier = $request->query('quartier');
+        $service = $request->query('service');
         $prefecture = $request->query('prefecture');
         $minDistance = $request->query('distance');
 
@@ -33,7 +34,9 @@ class SearchController extends Controller
             $workers =
                 DB::table('coords')
                     ->selectRaw($query, [$latitude, $latitude, $longitude])
-                    ->join('workers as w', 'worker_id', '=', 'w.id');
+                    ->join('workers as w', 'worker_id', '=', 'w.id')
+                    ->join('user_skills as us', 'w.user_id', '=', 'us.user_id')
+                    ->whereRaw('us.skill_id = ?', [$service]);
 
             if(is_null($quartier))
                 $workers = $workers->havingRaw('distance <= ?', [$minDistance]);
@@ -47,7 +50,7 @@ class SearchController extends Controller
 
         return view('search.search', [
             'workers' => $workers,
-            'skills' => Skill::get()
+            'skills' => Skill::where('visible', 1)->get()
         ]);
     }
 

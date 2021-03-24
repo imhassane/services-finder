@@ -34,4 +34,18 @@ class CategoryController extends Controller
 
         return back()->with('success', "La catégorie a été ajoutée");
     }
+
+    public function activate(Request $request, Skill $skill) {
+        $skill->visible = 1;
+        $skill->save();
+
+        return back();
+    }
+
+    public function destroy(Request $request, Skill $skill) {
+        $skill->visible = 0;
+        $skill->save();
+
+        return back();
+    }
 }

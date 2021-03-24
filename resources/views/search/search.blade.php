@@ -4,7 +4,7 @@
 
 @section('page_content')
 
-    <div class="py-10 px-5">
+    <div class="py-10 px-5 md:px-12">
         <h1 class="text-3xl font-bold mb-10">Services à proximité de chez vous</h1>
 
         <form
