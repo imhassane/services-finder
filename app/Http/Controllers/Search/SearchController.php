@@ -39,7 +39,10 @@ class SearchController extends Controller
                     ->whereRaw('us.skill_id = ?', [$service]);
 
             if(is_null($quartier))
-                $workers = $workers->havingRaw('distance <= ?', [$minDistance]);
+                $workers = $workers->whereRaw(
+                    "(((acos(sin((? * pi()/180)) * sin((latitude*pi()/180)) + cos((? * pi()/180)) *".
+                    "cos((latitude*pi()/180)) * cos(((? - longitude) * pi()/180)))) * 180/pi()) * 60 * 1.1515 *" .
+                    "1.609344) < ?", [$latitude, $latitude, $longitude, $minDistance]);
             else
                 $workers = $workers
                                 ->whereRaw('quartier = ?', [strtolower($quartier)])
