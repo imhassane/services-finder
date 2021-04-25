@@ -15,16 +15,21 @@
             flex-direction: column;
             justify-content: center;
         }
+
+        #img-grid {
+            height: calc(100vh - 60px);
+        }
     </style>
 @endsection
+
 @section('page_content')
     <input type="hidden" id="positionHf" />
-<div class="h-screen relative">
-    <div class="grid grid-cols-1 md:grid-cols-3" id="img-grid">
-        <img src="{{ $bag }}" class="h-screen w-full" />
+<div class="h-full relative">
+    <div class="grid grid-cols-1" id="img-grid">
+        <img src="{{ $young_woman }}" class="h-full w-full object-cover" />
+        <!--
         <img src="{{ $beach }}" class="hidden w-full sm:block h-screen" />
         <img src="{{ $farmer }}" class="hidden w-full sm:block h-screen" />
-        <!--
         <img src="{{ $carpenter }}" />
         <img src="{{ $old_guy }}" />
         <img src="{{ $young_woman }}" />
