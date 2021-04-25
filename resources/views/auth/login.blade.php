@@ -18,12 +18,12 @@
             <form action="{{ route('login') }}" method="post">
                 @csrf
                 <div class="mb-4">
-                    <label for="email" class="font-semibold block mb-3">Adresse email</label>
+                    <label for="telephone" class="font-semibold block mb-3">Numéro de téléphone</label>
                     <input
-                        type="email" name="email" id="email"
-                        class="border px-3 py-2 rounded w-full @error('email') border-red-500 @enderror"
+                        type="tel" name="telephone" id="telephone"
+                        class="border px-3 py-2 rounded w-full @error('telephone') border-red-500 @enderror"
                     />
-                    @error('email')
+                    @error('telephone')
                         <p class="text-sm text-red-500">{{ $message }}</p>
                     @enderror
                 </div>

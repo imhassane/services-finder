@@ -12,6 +12,7 @@
 
             }
         </style>
+        @yield('head')
     </head>
     <body class="h-screen">
         <header class="py-4 border-b-2 sticky top-0 z-50 bg-white">

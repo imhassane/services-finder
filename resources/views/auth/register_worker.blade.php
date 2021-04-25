@@ -35,13 +35,13 @@
                     </div>
                 </div>
                 <div class="flex-1 mb-4">
-                    <label for="email" class="font-semibold mb-3 block">Adresse email</label>
+                    <label for="phoneNumber" class="font-semibold mb-3 block">Numéro de téléphone</label>
                     <input
-                        type="text" id="email" name="email"
-                        class="border px-2 py-2 w-full rounded @error('email') border-red-500 @enderror"
-                        value="{{ old('email') }}"
+                        type="tel" id="phoneNumber" name="phoneNumber"
+                        class="border px-2 py-2 w-full rounded @error('phoneNumber') border-red-500 @enderror"
+                        value="{{ old('phoneNumber') }}"
                     />
-                    @error('email')
+                    @error('phoneNumber')
                         <p class="my-2 text-sm text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
@@ -63,12 +63,6 @@
                             class="border px-2 py-2 w-full rounded"
                         />
                     </div>
-                </div>
-                <div class="mb-4">
-                    <input type="checkbox" name="agree" id="agree" class="border" />
-                    <label for="agree" class="ml-3 font-semibold @error('agree') text-red-500 @enderror">
-                        En m'inscrivant, je confirme avoir lu les règles de la plateforme
-                    </label>
                 </div>
                 <div>
                     <button
