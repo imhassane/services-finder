@@ -17,7 +17,6 @@
         }
     </style>
 @endsection
-
 @section('page_content')
     <input type="hidden" id="positionHf" />
 <div class="h-screen relative">
