@@ -12,13 +12,14 @@ class Worker extends Model
     protected $fillable = [
         'first_name',
         'last_name',
+        'phone_number',
         'note',
         'avatar',
         'user_id'
     ];
 
     public function user() {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function coords() {

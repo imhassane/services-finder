@@ -12,28 +12,43 @@
         <div>
 
             @if($categories->count())
-                <table class="px-3">
-                    <thead>
-                        <th class="w-20">Image</th>
-                        <th class="w-1/4">Titre</th>
-                        <th>Description</th>
-                        <th class="w-24"></th>
-                    </thead>
-                    <tbody>
+                    <div class="flex">
+                        <div class="w-24">Image</div>
+                        <div class="w-3/12">Titre</div>
+                        <div class="w-5/12">Description</div>
+                        <div class="flex-1"></div>
+                    </div>
+                    <div>
                         @foreach($categories as $cat)
-                            <tr class="hover:bg-gray-200 cursor-pointer border-b">
-                                <td>
-                                    <img src="{{ $cat->cover }}" alt="" class="w-12 h-12 object-cover rounded-full mx-auto">
+                            <div class="flex hover:bg-gray-100 cursor-pointer border-b text-sm py-4">
+                                <div class="w-24">
+                                    <img src="{{ $cat->cover }}" alt="" class="w-12 h-12 object-cover rounded-full">
+                                </div>
+                                <div class="w-3/12">{{ $cat->title  }}</div>
+                                <div class="w-5/12">{{ $cat->description }}</div>
+                                <td class="flex-1">
+                                    @if($cat->visible == 1)
+                                        <form action="{{ route('destroy_category_admin', $cat) }}" method="post">
+                                            @csrf
+                                            @method("DELETE")
+                                            <button
+                                                type="submit"
+                                                class="bg-red-500 text-white font-semibold border border-red-500 rounded px-3 py-1"
+                                            >Masquer</button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('activate_category_admin', $cat) }}" method="post">
+                                            @csrf
+                                            <button
+                                                type="submit"
+                                                class="bg-blue-500 text-white font-semibold border border-blue-500 rounded px-3 py-1"
+                                            >Activer</button>
+                                        </form>
+                                    @endif
                                 </td>
-                                <td class="pl-2 py-8">{{ $cat->title  }}</td>
-                                <td>{{ $cat->description }}</td>
-                                <td>
-                                    <a href="" class="text-red-500">Supprimer</a>
-                                </td>
-                            </tr>
+                            </div>
                         @endforeach
-                    </tbody>
-                </table>
+                    </div>
             @else
                 <p class="font-semibold">Aucune catégorie pour le moment</p>
             @endif

@@ -27,14 +27,12 @@ class RegisterController extends Controller
         $this->validate($request, [
             'firstName' => 'required',
             'lastName' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|min:8|confirmed',
-            'agree' => 'required'
+            'phoneNumber' => 'required|min:9|max:9',
+            'password' => 'required|min:8|confirmed'
         ]);
 
         DB::transaction(function() use ($request) {
             $user = User::create([
-                'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'name' => $request->firstName . " " . $request->lastName,
                 'status' => 'WORKER'
@@ -43,16 +41,14 @@ class RegisterController extends Controller
                 'first_name' => $request->firstName,
                 'last_name' => $request->lastName,
                 'avatar' => 'default.png',
+                'phone_number' => $request->phoneNumber,
                 'note' => 0,
                 'user_id' => $user->id
             ]);
         });
 
         // Connexion
-        auth()->attempt($request->only('email', 'password'));
-
-        // Choix des compétences
-        return redirect()->route('choose_skill');
+        return redirect()->route('login');
     }
 
     public function storeUser(Request $request) {

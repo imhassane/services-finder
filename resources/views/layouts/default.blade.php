@@ -2,6 +2,7 @@
 <html lang="fr">
     <head>
         <title>@yield('page_title')</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
 
@@ -10,10 +11,19 @@
             * {
 
             }
+
+            header {
+                top: 0px;
+            }
+
+            footer {
+                height: 100vh;
+            }
         </style>
+        @yield('head')
     </head>
     <body class="h-screen">
-        <header class="py-4 border-b-2 sticky top-0 z-50 bg-white">
+        <header class="py-4 border-b-2 sticky z-50 bg-white">
             <nav class="md:flex">
                 <ul class="mb-4 md:mb-0 md:flex justify-center items-center flex-1">
                     <li class="px-2 font-semibold mr-4">
@@ -22,7 +32,7 @@
                     @auth
                         @if(auth()->user()->status == "ADMIN")
                             <li class="px-2 text-sm mr-4">
-                                <a href="{{ route('dashboard') }}"><i class="fas fa-chalkboard-teacher mr-2"></i> Tableau de bord</a>
+                                <a href="{{ route('categories_admin') }}"><i class="fas fa-chalkboard-teacher mr-2"></i> Tableau de bord</a>
                             </li>
                         @endif
                     @endauth
@@ -45,15 +55,15 @@
                     @endauth
                     @guest
                         <li class="px-2 text-sm">
-                            <a href="{{ route('register') }}">Inscription</a>
+                            <a href="{{ route('register_worker') }}"><i class="fas fa-registered mr-1"></i> Inscription</a>
                         </li>
-                        <li class="px-2 text-sm"><a href="{{ route('login') }}">Connexion</a></li>
+                        <li class="px-2 text-sm"><a href="{{ route('login') }}"><i class="fas fa-at mr-1"></i> Connexion</a></li>
                     @endguest
                 </ul>
             </nav>
         </header>
 
-        <main class="bg-white z-50" style="min-height: 100vh">
+        <main class="bg-white z-50" style="min-height: calc(100vh - 60px)">
             @yield('page_content')
         </main>
 
@@ -89,17 +99,19 @@
                 <div class="flex-1 md:px-14">
                     <p class="font-bold text-2xl mb-4">Liens utiles</p>
                     <p>
-                        <a href="" class="">Contact</a>
+                        <a href="" class="">Conditions d'utilisation</a>
+                    </p>
+                    <p>
+                        <a href="" class="">Données personnelles</a>
                     </p>
                 </div>
                 <div class="flex-1 mt-4 md:mt-0 md:px-14">
                     <p class="font-bold text-2xl">Contact</p>
                 </div>
             </div>
-            <p class="px-4 py-3 md:py-4 md:px-24 bg-gray-600 border-gray-800 border-t text-sm font-semibold">
+            <p class="absolute bottom-0 w-full px-4 py-3 md:py-4 md:px-24 bg-gray-600 border-gray-800 border-t text-sm font-semibold">
                Créé avec <i class="fas fa-heart"></i> par
-                <a href="https://instagram.com/imhassane" class="font-bold" target="_blank">Hassane SOW</a> et
-                <span class="font-bold">Rodney ABOUE</span>
+                <a href="https://instagram.com/imhassane" class="font-bold" target="_blank">Hassane SOW</a>
             </p>
         </footer>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>

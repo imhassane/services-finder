@@ -4,8 +4,8 @@
 
 @section('page_content')
 
-    <div class="h-full pt-20">
-        <div class="w-1/2 mx-auto p-12 bg-white">
+    <div class="h-full md:pt-20">
+        <div class="md:w-1/2 mx-auto p-4 md:p-12 bg-white">
 
             <h1 class="text-3xl font-bold mb-10">Connexion</h1>
 
@@ -15,32 +15,15 @@
                 </div>
             @endif
 
-            <div class="my-6 flex">
-                <form class="flex-1 mr-1" action="" method="post">
-                    @csrf
-                    <button
-                        type="submit"
-                        class="w-full border py-1 rounded"
-                    >Se connecter avec Google</button>
-                </form>
-                <form class="flex-1" action="" method="post">
-                    @csrf
-                    <button
-                        type="submit"
-                        class="w-full border py-1 rounded"
-                    >Se connecter avec facebook</button>
-                </form>
-            </div>
-
             <form action="{{ route('login') }}" method="post">
                 @csrf
                 <div class="mb-4">
-                    <label for="email" class="font-semibold block mb-3">Adresse email</label>
+                    <label for="telephone" class="font-semibold block mb-3">Numéro de téléphone</label>
                     <input
-                        type="email" name="email" id="email"
-                        class="border px-3 py-2 rounded w-full @error('email') border-red-500 @enderror"
+                        type="tel" name="telephone" id="telephone"
+                        class="border px-3 py-2 rounded w-full @error('telephone') border-red-500 @enderror"
                     />
-                    @error('email')
+                    @error('telephone')
                         <p class="text-sm text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
@@ -65,6 +48,10 @@
                     >Connexion</button>
                 </div>
             </form>
+
+            <div class="my-4">
+                <a href="{{ route('reactivation_demand') }}" class="text-sm text-blue-500">Faire une demande de réactivation</a>
+            </div>
         </div>
     </div>
 
