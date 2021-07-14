@@ -31,8 +31,16 @@
                     <div class="w-2/12">{{ $w->first_name }}</div>
                     <div class="w-2/12">{{ $w->last_name }}</div>
                     <div class="w-2/12">{{ $w->phone_number }}</div>
-                    <div class="w-2/12">{{ $w->coords->first()->quartier }}</div>
-                    <div class="w-1/12">{{ $w->coords->first()->prefecture }}</div>
+                    <div class="w-2/12">
+                        @if($w->coords->first())
+                            {{ $w->coords->first()->quartier }}
+                        @endif
+                    </div>
+                    <div class="w-1/12">
+                        @if($w->coords->first())
+                            {{ $w->coords->first()->prefecture }}
+                        @endif
+                    </div>
                     <div class="flex-1">
                         <ul class="w-full flex justify-end">
                             <li class="mr-3">
