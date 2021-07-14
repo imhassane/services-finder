@@ -18,6 +18,10 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
+    public function loginAdmin() {
+        return view('auth.login_admin');
+    }
+
     public function reactivationDemand() {
         return view('auth.reactivation_demand');
     }
@@ -54,6 +58,22 @@ class LoginController extends Controller
         }
 
         return redirect()->route("worker_settings");
+    }
+
+    public function authenticateAdmin(Request $request) {
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required|min:8'
+        ]);
+
+        if(!Auth::attempt([
+            'email' => $request->email,
+            'password' => $request->password
+        ], true)) {
+           return back()->with('fail', "Le compte n'est pas reconnu");
+        }
+
+        return redirect()->route('categories_admin');
     }
 
     public function reactivate(Request $request) {

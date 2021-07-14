@@ -112,6 +112,7 @@
             <p class="absolute bottom-0 w-full px-4 py-3 md:py-4 md:px-24 bg-gray-600 border-gray-800 border-t text-sm font-semibold">
                Créé avec <i class="fas fa-heart"></i> par
                 <a href="https://instagram.com/imhassane" class="font-bold" target="_blank">Hassane SOW</a>
+                <a class="float-right" href="{{ route('login_admin') }}">Administration</a>
             </p>
         </footer>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>

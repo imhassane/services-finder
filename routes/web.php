@@ -35,6 +35,9 @@ Route::prefix('auth')->group(function() {
     Route::get("/login", [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'authenticate']);
 
+    Route::get('/login/admin', [LoginController::class, 'loginAdmin'])->name('login_admin');
+    Route::post('/login/admin', [LoginController::class, 'authenticateAdmin']);
+
     Route::get('/reactivation', [LoginController::class, 'reactivationDemand'])->name('reactivation_demand');
     Route::post('/reactivation', [LoginController::class, 'reactivate']);
 
